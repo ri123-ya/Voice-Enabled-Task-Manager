@@ -86,10 +86,22 @@ export const analyzeTaskInput = async (req, res) => {
       return res.status(400).json({ message: 'Transcript is required' });
     }
 
+    // Parse voice input with AI
     const parsedData = await parseTaskInput(transcript);
-    res.status(200).json(parsedData);
+    
+    // Clean up empty fields - remove description if it's empty or whitespace
+    if (parsedData.description && parsedData.description.trim() === '') {
+      delete parsedData.description;
+    }
+    
+    // Create and save the task to database
+    const task = new Task(parsedData);
+    const savedTask = await task.save();
+    
+    res.status(201).json(savedTask);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to analyze input', error: error.message });
+    res.status(500).json({ message: 'Failed to analyze and save task', error: error.message });
   }
 };
+
 
