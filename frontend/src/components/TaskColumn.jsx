@@ -1,7 +1,7 @@
 import React from 'react';
 import TaskCard from './TaskCard';
 
-const TaskColumn = ({ title, tasks, icon, color, onDeleteTask, onStatusChange }) => {
+const TaskColumn = ({ title, tasks, icon, color, onDeleteTask, onStatusChange, onEditTask }) => {
   const colorClasses = {
     todo: {
       bg: 'bg-gradient-to-br from-gray-800 to-gray-900',
@@ -53,6 +53,7 @@ const TaskColumn = ({ title, tasks, icon, color, onDeleteTask, onStatusChange })
               task={task}
               onDelete={onDeleteTask}
               onStatusChange={onStatusChange}
+              onEdit={onEditTask}
             />
           ))
         )}
