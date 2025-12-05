@@ -2,13 +2,22 @@ import { useState, useEffect } from 'react';
 import KanbanColumn from './components/TaskColumn';
 import VoiceButton from './components/VoiceButton';
 import AddTaskModal from './components/AddNewTask';
+import EditTaskModal from './components/EditTaskCard';
+import SearchFilter from './components/SearchFilter';
 import { connection } from './api/connection';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notification, setNotification] = useState(null);
+  const [filters, setFilters] = useState({
+    searchTerm: '',
+    status: null,
+    priority: null
+  });
 
   // Fetch tasks on component mount
   useEffect(() => {
@@ -61,6 +70,24 @@ function App() {
     }
   };
 
+  const handleEditTask = async (taskId, taskData) => {
+    try {
+      const updatedTask = await connection.updateTask(taskId, taskData);
+      setTasks(tasks.map(task => task._id === taskId ? updatedTask : task));
+      showNotification('Task updated successfully!', 'success');
+      setIsEditModalOpen(false);
+      setSelectedTask(null);
+    } catch (error) {
+      showNotification('Failed to update task', 'error');
+      console.error('Error updating task:', error);
+    }
+  };
+
+  const handleOpenEditModal = (task) => {
+    setSelectedTask(task);
+    setIsEditModalOpen(true);
+  };
+
   const handleVoiceCommand = async (command) => {
     try {
       showNotification(`Processing: "${command}"`, 'info');
@@ -83,10 +110,41 @@ function App() {
     setTimeout(() => setNotification(null), 3000);
   };
 
-  // Filter tasks by status
-  const todoTasks = tasks.filter(task => task.status === 'To Do');
-  const inProgressTasks = tasks.filter(task => task.status === 'In Progress');
-  const doneTasks = tasks.filter(task => task.status === 'Done');
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+  };
+
+  // Apply filters to tasks
+  const getFilteredTasks = () => {
+    return tasks.filter(task => {
+      // Search filter (title or description)
+      if (filters.searchTerm) {
+        const searchLower = filters.searchTerm.toLowerCase();
+        const matchesSearch = 
+          task.title.toLowerCase().includes(searchLower) ||
+          (task.description && task.description.toLowerCase().includes(searchLower));
+        if (!matchesSearch) return false;
+      }
+
+      // Status filter
+      if (filters.status && task.status !== filters.status) {
+        return false;
+      }
+
+      // Priority filter
+      if (filters.priority && task.priority !== filters.priority) {
+        return false;
+      }
+
+      return true;
+    });
+  };
+
+  // Filter tasks by status from filtered results
+  const filteredTasks = getFilteredTasks();
+  const todoTasks = filteredTasks.filter(task => task.status === 'To Do');
+  const inProgressTasks = filteredTasks.filter(task => task.status === 'In Progress');
+  const doneTasks = filteredTasks.filter(task => task.status === 'Done');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
@@ -122,6 +180,9 @@ function App() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
+        {/* Search and Filter */}
+        <SearchFilter onFilterChange={handleFilterChange} />
+        
         {loading ? (
           <div className="flex items-center justify-center h-96">
             <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
@@ -135,6 +196,7 @@ function App() {
               color="todo"
               onDeleteTask={handleDeleteTask}
               onStatusChange={handleStatusChange}
+              onEditTask={handleOpenEditModal}
             />
             <KanbanColumn
               title="In Progress"
@@ -143,6 +205,7 @@ function App() {
               color="inProgress"
               onDeleteTask={handleDeleteTask}
               onStatusChange={handleStatusChange}
+              onEditTask={handleOpenEditModal}
             />
             <KanbanColumn
               title="Done"
@@ -151,6 +214,7 @@ function App() {
               color="done"
               onDeleteTask={handleDeleteTask}
               onStatusChange={handleStatusChange}
+              onEditTask={handleOpenEditModal}
             />
           </div>
         )}
@@ -180,6 +244,17 @@ function App() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAddTask={handleAddTask}
+      />
+
+      {/* Edit Task Modal */}
+      <EditTaskModal
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setSelectedTask(null);
+        }}
+        onEditTask={handleEditTask}
+        task={selectedTask}
       />
 
       {/* Voice Button */}
