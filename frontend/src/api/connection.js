@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/tasks';
+const API_URL = 'http://localhost:3000/api/tasks';
 
 export const connection = {
   // Get all tasks
@@ -50,7 +50,7 @@ export const connection = {
   // Process voice command
   processVoiceCommand: async (command) => {
     try {
-      const response = await axios.post(`${API_URL}/voice`, { command });
+      const response = await axios.post(`${API_URL}/analyze`, { command });
       return response.data;
     } catch (error) {
       console.error('Error processing voice command:', error);
