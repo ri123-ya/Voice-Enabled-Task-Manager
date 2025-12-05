@@ -14,6 +14,17 @@ export const connection = {
     }
   },
 
+  // Get a single task by ID
+  getTaskById: async (id) => {
+    try {
+      const response = await axios.get(`${API_URL}/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching task:', error);
+      throw error;
+    }
+  },
+
   // Create a new task
   createTask: async (taskData) => {
     try {
