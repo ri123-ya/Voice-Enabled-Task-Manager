@@ -30,7 +30,7 @@ function App() {
 
   const handleAddTask = async (taskData) => {
     try {
-      const newTask = await taskService.createTask(taskData);
+      const newTask = await connection.createTask(taskData);
       setTasks([...tasks, newTask]);
       showNotification('Task added successfully!', 'success');
     } catch (error) {
@@ -41,7 +41,7 @@ function App() {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      await taskService.deleteTask(taskId);
+      await connection.deleteTask(taskId);
       setTasks(tasks.filter(task => task._id !== taskId));
       showNotification('Task deleted successfully!', 'success');
     } catch (error) {
@@ -52,7 +52,7 @@ function App() {
 
   const handleStatusChange = async (taskId, newStatus) => {
     try {
-      const updatedTask = await taskService.updateTask(taskId, { status: newStatus });
+      const updatedTask = await connection.updateTask(taskId, { status: newStatus });
       setTasks(tasks.map(task => task._id === taskId ? updatedTask : task));
       showNotification(`Task moved to ${newStatus}!`, 'success');
     } catch (error) {
@@ -64,7 +64,7 @@ function App() {
   const handleVoiceCommand = async (command) => {
     try {
       showNotification(`Processing: "${command}"`, 'info');
-      const result = await taskService.processVoiceCommand(command);
+      const result = await connection.processVoiceCommand(command);
       
       if (result.task) {
         setTasks([...tasks, result.task]);
@@ -91,27 +91,27 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       {/* Header */}
-      <header className="bg-gray-800 shadow-xl border-b border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
+      <header className="bg-gray-800 shadow-xl border-b border-gray-700 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="bg-gradient-to-r from-gray-700 to-gray-600 p-3 rounded-xl shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="bg-gradient-to-r from-gray-700 to-gray-600 p-2 sm:p-3 rounded-xl shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-100">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-100">
                   Voice Task Manager
                 </h1>
-                <p className="text-sm text-gray-400">Organize your work efficiently</p>
+                <p className="text-xs sm:text-sm text-gray-400">Organize your work efficiently</p>
               </div>
             </div>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
+              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 text-sm sm:text-base w-full sm:w-auto justify-center"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
               </svg>
               Add Task
@@ -121,13 +121,13 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         {loading ? (
           <div className="flex items-center justify-center h-96">
             <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
             <KanbanColumn
               title="To Do"
               tasks={todoTasks}
@@ -158,11 +158,11 @@ function App() {
 
       {/* Notification Toast */}
       {notification && (
-        <div className={`fixed top-8 right-8 z-50 animate-slide-down ${
+        <div className={`fixed top-4 right-4 sm:top-8 sm:right-8 z-50 animate-slide-down max-w-xs sm:max-w-sm ${
           notification.type === 'success' ? 'bg-green-500' :
           notification.type === 'error' ? 'bg-red-500' :
           'bg-blue-500'
-        } text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3`}>
+        } text-white px-4 py-3 sm:px-6 sm:py-4 rounded-xl shadow-2xl flex items-center gap-2 sm:gap-3 text-sm sm:text-base`}>
           <div className="flex-1 font-medium">{notification.message}</div>
           <button
             onClick={() => setNotification(null)}

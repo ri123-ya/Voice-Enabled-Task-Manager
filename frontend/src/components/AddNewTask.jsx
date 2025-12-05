@@ -33,11 +33,11 @@ const AddNewTask = ({ isOpen, onClose, onAddTask }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
-      <div className="bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full animate-slide-up border border-gray-700">
+      <div className="bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full animate-slide-up border border-gray-700 max-h-[90vh] overflow-y-auto">
         {/* Modal Header */}
-        <div className="bg-gradient-to-r from-gray-700 to-gray-600 text-white p-6 rounded-t-2xl">
+        <div className="bg-gradient-to-r from-gray-700 to-gray-600 text-white p-4 sm:p-6 rounded-t-2xl">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold">Add New Task</h2>
+            <h2 className="text-xl sm:text-2xl font-bold">Add New Task</h2>
             <button
               onClick={onClose}
               className="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-colors duration-200"
@@ -51,7 +51,7 @@ const AddNewTask = ({ isOpen, onClose, onAddTask }) => {
         </div>
 
         {/* Modal Body */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           {/* Title Input */}
           <div>
             <label htmlFor="title" className="block text-sm font-semibold text-gray-300 mb-2">

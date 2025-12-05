@@ -56,7 +56,7 @@ const VoiceButton = ({ onVoiceCommand }) => {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50">
       {/* Transcript Display */}
       {transcript && (
         <div className="absolute bottom-20 right-0 bg-white rounded-xl shadow-2xl p-4 mb-2 max-w-xs animate-fade-in border-2 border-indigo-200">
@@ -70,7 +70,7 @@ const VoiceButton = ({ onVoiceCommand }) => {
       {/* Voice Button */}
       <button
         onClick={toggleListening}
-        className={`relative group w-16 h-16 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 ${
+        className={`relative group w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 ${
           isListening
             ? 'bg-gradient-to-r from-red-500 to-pink-500 animate-pulse'
             : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700'
@@ -85,11 +85,11 @@ const VoiceButton = ({ onVoiceCommand }) => {
         {/* Icon */}
         <div className="relative flex items-center justify-center w-full h-full">
           {isListening ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clipRule="evenodd" />
             </svg>
           )}

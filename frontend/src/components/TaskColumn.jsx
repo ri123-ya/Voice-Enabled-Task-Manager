@@ -25,11 +25,11 @@ const TaskColumn = ({ title, tasks, icon, color, onDeleteTask, onStatusChange })
   return (
     <div className={`${selectedColor.bg} rounded-2xl shadow-lg border-2 ${selectedColor.border} overflow-hidden transition-all duration-300 hover:shadow-2xl`}>
       {/* Column Header */}
-      <div className={`${selectedColor.header} p-4 text-white`}>
+      <div className={`${selectedColor.header} p-3 sm:p-4 text-white`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-2xl">{icon}</span>
-            <h2 className="text-xl font-bold">{title}</h2>
+            <span className="text-xl sm:text-2xl">{icon}</span>
+            <h2 className="text-lg sm:text-xl font-bold">{title}</h2>
           </div>
           <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-3 py-1">
             <span className="text-sm font-semibold">{tasks.length}</span>
@@ -38,7 +38,7 @@ const TaskColumn = ({ title, tasks, icon, color, onDeleteTask, onStatusChange })
       </div>
 
       {/* Tasks Container */}
-      <div className="p-4 min-h-[200px] max-h-[calc(100vh-250px)] overflow-y-auto custom-scrollbar">
+      <div className="p-3 sm:p-4 min-h-[150px] sm:min-h-[200px] max-h-[400px] sm:max-h-[calc(100vh-250px)] overflow-y-auto custom-scrollbar">
         {tasks.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-40 text-gray-500">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -20,7 +20,7 @@ const TaskCard = ({ task, onDelete, onStatusChange }) => {
   };
 
   return (
-    <div className="bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-4 mb-3 border border-gray-700 hover:border-gray-600 group">
+    <div className="bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-3 sm:p-4 mb-2 sm:mb-3 border border-gray-700 hover:border-gray-600 group">
       {/* Priority Badge */}
       <div className="flex items-center justify-between mb-2">
         <span className={`${priorityColor} text-white text-xs font-semibold px-3 py-1 rounded-full`}>
@@ -38,13 +38,13 @@ const TaskCard = ({ task, onDelete, onStatusChange }) => {
       </div>
 
       {/* Task Title */}
-      <h3 className="text-lg font-bold text-gray-100 mb-2 line-clamp-2">
+      <h3 className="text-base sm:text-lg font-bold text-gray-100 mb-2 line-clamp-2">
         {task.title}
       </h3>
 
       {/* Task Description */}
       {task.description && (
-        <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+        <p className="text-xs sm:text-sm text-gray-400 mb-3 line-clamp-2">
           {task.description}
         </p>
       )}
@@ -60,7 +60,7 @@ const TaskCard = ({ task, onDelete, onStatusChange }) => {
       )}
 
       {/* Status Change Buttons */}
-      <div className="flex gap-2 mt-3">
+      <div className="flex flex-col sm:flex-row gap-2 mt-3">
         {task.status !== 'To Do' && (
           <button
             onClick={() => onStatusChange(task._id, 'To Do')}
