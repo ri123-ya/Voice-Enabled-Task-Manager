@@ -15,7 +15,7 @@ const taskSchema = new mongoose.Schema({
   },
   priority: { 
     type: String, 
-    enum: ['Low', 'Medium', 'High', 'Critical'], 
+    enum: ['Urgent', 'High Priority', 'Low Priority', 'Critical'], 
     default: 'Medium' 
   },
   dueDate: { 
