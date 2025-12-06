@@ -242,34 +242,11 @@ http://localhost:5000/api
 
 **Endpoint**: `POST /api/tasks`
 
-**Request Body**:
-```json
-{
-  "title": "Complete project documentation",
-  "priority": "High"
-}
-```
-
 **Success Response (201)**:
 ![Create Task Response](assets/create_task_response.png)
-```json
-{
-  "_id": "693198a1827a4e8786209b15",
-  "title": "Complete project documentation",
-  "status": "To Do",
-  "priority": "High",
-  "createdAt": "2025-12-04T14:20:17.315Z",
-  "updatedAt": "2025-12-04T14:20:17.315Z"
-}
-```
 
 **Error Response (400)**:
 ![Create Task Error Response](assets/create_task_error.png)
-```json
-{
-  "message": "Task validation failed: title: Path `title` is required."
-}
-```
 
 ---
 
@@ -279,16 +256,6 @@ http://localhost:5000/api
 
 **Success Response (200)**:
 ![Get All Tasks Response](assets/get_all_tasks_response.png)
-```json
-[
-  {
-    "_id": "693198a1827a4e8786209b15",
-    "title": "Complete project documentation",
-    "status": "To Do",
-    "priority": "High"
-  }
-]
-```
 
 ---
 
@@ -298,22 +265,9 @@ http://localhost:5000/api
 
 **Success Response (200)**:
 ![Get Task By ID Response](assets/get_task_by_id_response.png)
-```json
-{
-  "_id": "693198a1827a4e8786209b15",
-  "title": "Complete project documentation",
-  "status": "To Do",
-  "priority": "High"
-}
-```
 
 **Error Response (404)**:
 ![Task Not Found Response](assets/task_not_found_response.png)
-```json
-{
-  "message": "Task not found"
-}
-```
 
 ---
 
@@ -321,23 +275,11 @@ http://localhost:5000/api
 
 **Endpoint**: `PUT /api/tasks/:id`
 
-**Request Body**:
-```json
-{
-  "status": "In Progress"
-}
-```
-
 **Success Response (200)**:
 ![Update Task Response](assets/update_task_response.png)
-```json
-{
-  "_id": "693198a1827a4e8786209b15",
-  "title": "Complete project documentation",
-  "status": "In Progress",
-  "priority": "High"
-}
-```
+
+**Error Response (404)**:
+![Task Not Found Response](assets/update_task_error.png)
 
 ---
 
@@ -347,11 +289,9 @@ http://localhost:5000/api
 
 **Success Response (200)**:
 ![Delete Task Response](assets/delete_task_response.png)
-```json
-{
-  "message": "Task deleted successfully"
-}
-```
+
+**Error Response (404)**:
+![Task Not Found Response](assets/delete_task_error.png)
 
 ---
 
@@ -359,32 +299,11 @@ http://localhost:5000/api
 
 **Endpoint**: `POST /api/tasks/analyze`
 
-**Request Body**:
-```json
-{
-  "transcript": "Create a high priority task to prepare presentation by Friday"
-}
-```
-
 **Success Response (201)**:
 ![Analyze Voice Input Response](assets/analyze_voice_response.png)
-```json
-{
-  "_id": "69319861827a4e8786209b13",
-  "title": "Prepare presentation",
-  "priority": "High",
-  "dueDate": "2025-12-06T00:00:00.000Z",
-  "status": "To Do"
-}
-```
 
 **Error Response (400)**:
 ![Analyze Error Response](assets/analyze_error_response.png)
-```json
-{
-  "message": "Transcript is required"
-}
-```
 
 ---
 
