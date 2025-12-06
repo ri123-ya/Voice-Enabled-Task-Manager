@@ -14,6 +14,8 @@ export const parseTaskInput = async (transcript) => {
       You are an intelligent task parser. Extract structured task details from the following user input:
       "${transcript}"
 
+      Current Date/Time: ${new Date().toISOString()}
+
       Return ONLY a JSON object with the following fields:
       - title: (String) The COMPLETE task description including all core details (what needs to be done, for whom, about what topic). Examples:
         * Input: "Send email to team about project updates" → Title: "Send email to team about project updates"
@@ -27,10 +29,24 @@ export const parseTaskInput = async (transcript) => {
         * Examples of valid descriptions: "Include budget breakdown and timeline", "Focus on security vulnerabilities", "Use the new template from marketing"
         * If there are no extra details beyond the basic task, status, priority, and deadline, leave this field empty ("").
         
-      - priority: (String) One of "Low", "Medium", "High", "Critical". Default to "Medium" if not specified. Extract this from phrases like "high priority", "urgent", "critical", "low priority", etc.
-      - dueDate: (String) ISO 8601 date string (YYYY-MM-DD) if a date is mentioned. Calculate relative dates (e.g., "tomorrow", "next friday", "next Wednesday") based on the current date: ${new Date().toISOString()}.
+      - priority: (String) One of "Urgent", "High Priority", "Low Priority", "Critical". 
+        * Default to "Low Priority" if not specified.
+        * Map "high" to "High Priority".
+        * Map "medium" or "normal" to "Low Priority".
+        * Map "urgent" to "Urgent".
+        * Map "critical" to "Critical".
+      
+      - dueDate: (String/null) ISO 8601 date string (YYYY-MM-DD) if a date is mentioned. 
+        * You MUST calculate the exact date based on the "Current Date/Time" provided above.
+        * Example: If current date is 2023-10-27 and input says "tomorrow", return "2023-10-28".
+        * Example: If input says "next Friday", calculate the date of the next Friday.
+        * STRICTLY return the date in "YYYY-MM-DD" format. Do NOT return words like "tomorrow", "today", or "Monday".
+        * Return null if no specific due date is mentioned.
+
       - status: (String) One of "To Do", "In Progress", "Done". Default to "To Do".
+
       IMPORTANT: Do NOT put priority indicators (like "it's high priority"), status indicators, or deadline information in the description field. Only include substantive additional details about the task itself.
+      
       CRITICAL RULES:
       1. The title must be COMPLETE and include the subject/topic (e.g., "about project updates", "regarding the contract")
       2. Do NOT split the basic task between title and description
