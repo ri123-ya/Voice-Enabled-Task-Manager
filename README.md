@@ -594,7 +594,7 @@ When AI parsing issues occurred:
   - Better handling of background noise
 
 **AI-Assisted Migration:**
-- **AI Tool Assistance**: Used Antigravity (Google Gemini) to guide the migration
+- **AI Tool Assistance**: Used Claude to guide the migration
 - **How AI Helped**:
   1. Explained Deepgram API integration process
   2. Generated boilerplate code for MediaRecorder and audio blob handling
