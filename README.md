@@ -231,7 +231,7 @@ http://localhost:5000/api
 |--------|------|-------------|
 | `POST` | `/tasks` | Create new task |
 | `GET` | `/tasks` | Get all tasks (with filters) |
-| `GET` | `/tasks/:id` | Get specific task |
+| `GET` | `/tasks/:id` | Search specific task |
 | `PUT` | `/tasks/:id` | Update existing task |
 | `DELETE` | `/tasks/:id` | Delete task |
 | `POST` | `/tasks/analyze` | AI-parse voice input & save |
