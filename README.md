@@ -595,6 +595,43 @@ When AI parsing issues occurred:
 4. **Verify**: Tested with multiple edge cases
 5. **Document**: Added examples to prevent regression
 
+#### Voice Recognition Technology Evolution
+
+**Initial Implementation - Web Speech API:**
+- Started with browser's built-in Web Speech API for voice recognition
+- **Problems Encountered**:
+  - Inconsistent performance across browsers (especially in Brave)
+  - Limited browser support and compatibility issues
+  - Less accurate transcription quality
+  - No control over the recognition model
+
+**Research & Discovery:**
+- Conducted Google research on voice recognition alternatives
+- Discovered Deepgram API as a more robust solution
+- Found that Deepgram offers:
+  - 45,000 minutes/year free tier
+  - Nova-2 model with superior accuracy
+  - Cross-browser compatibility
+  - Better handling of background noise
+
+**AI-Assisted Migration:**
+- **AI Tool Assistance**: Used Antigravity (Google Gemini) to guide the migration
+- **How AI Helped**:
+  1. Explained Deepgram API integration process
+  2. Generated boilerplate code for MediaRecorder and audio blob handling
+  3. Helped configure optimal audio settings (48kHz sample rate, noise suppression)
+  4. Debugged API request/response handling
+  5. Suggested better error handling patterns
+  
+**Final Implementation - Deepgram API:**
+- Uses MediaRecorder API to capture high-quality audio
+- Sends audio blobs to Deepgram's Nova-2 model
+- Provides editable transcription before task creation
+- Works reliably across all modern browsers including Brave
+
+**Result**: Significantly improved voice recognition accuracy and user experience across all browsers.
+
+
 ### What I Learned
 
 #### 1. **Prompt Engineering is Critical**
@@ -638,16 +675,6 @@ When AI parsing issues occurred:
 4. **Better code organization** (separation of concerns)
 5. **Comprehensive README** that would have taken hours manually
 
-### AI Tool Impact Summary
-
-| Aspect | Time Saved | Quality Improvement |
-|--------|------------|---------------------|
-| Boilerplate Code | ~60% | High - consistent patterns |
-| API Design | ~40% | High - RESTful best practices |
-| Debugging | ~50% | Medium - still need understanding |
-| Documentation | ~70% | Very High - comprehensive & structured |
-| Overall Project | ~50% | High - production-ready code |
-
 ---
 
 ## 📄 License
@@ -663,17 +690,6 @@ This project is licensed under the ISC License. See the [LICENSE](LICENSE) file 
 
 ---
 
-## 🙏 Acknowledgments
-
-- Google Generative AI for the powerful Gemini 2.0 Flash model
-- MongoDB for the flexible database solution
-- Express.js community for excellent documentation
-- AI coding assistants (Antigravity) for development acceleration
-
----
 
 > [!TIP]
 > For AI-powered task creation, ensure your Gemini API key has sufficient quota and the correct model access.
-
-> [!WARNING]
-> This application currently has no authentication. Do not deploy to production without implementing proper security measures.
