@@ -13,7 +13,6 @@ A modern task management application that leverages AI and voice input to create
 - [AI Tools Usage](#ai-tools-usage)
 - [License](#license) -->
 
----
 
 ## ✨ Features
 
