@@ -509,50 +509,30 @@ aerchain/
 ## 🤖 AI Tools Usage
 
 ### Tools Used During Development
-
-**Google Gemini AI (via Antigravity)**
-- Code generation, debugging, and documentation
-- Boilerplate code for Express routes and controllers
-- MongoDB schema design and Mongoose model creation
-- Error handling patterns
-- README documentation structure
-- API endpoint design
+- **ChatGPT**
+- **Claude**
 
 ### What AI Tools Helped With
 
-#### 1. **Boilerplate Generation**
-- Express server setup with ES modules
-- MongoDB connection configuration
-- CRUD controller function templates
-- Route definitions
+#### 1. Voice Recognition Implementation
+- **Web Speech API to Deepgram**: 
+  - Initially used AI to understand and implement the browser's Web Speech API. 
+  - After researching trade-offs (browser compatibility, accuracy), recognized the need for a more robust solution.
+  - Used Deepgram API as the solution. AI assisted significantly in integrating Deepgram, specifically with MediaRecorder setup and handling audio blobs.
 
-#### 2. **AI Service Implementation**
-- Integration with Google Generative AI SDK
-- Prompt engineering for task parsing
-- JSON response parsing and error handling
+#### 2. Database & Logic
+- **Time Storage**: AI provided solutions for correctly storing and retrieving time/dates in MongoDB.
+- **Debugging**: Utilized AI to debug various issues, including API connection errors and state management in React.
 
-**Iterations**:
-- **V1**: Basic extraction - description was polluted with priority indicators
-- **V2**: Added exclusion rules - still had issues with task subjects in description
-- **V3**: Added explicit examples and critical rules - working correctly now
+#### 3. Documentation & Structure
+- **README**: AI helped structure this documentation effectively, ensuring all key sections (Setup, API, Tech Stack) were covered professionally.
 
-#### 3. **Debugging Assistance**
-- Identified issue with empty descriptions being saved
-- Suggested cleanup logic in controller
-- Helped trace AI parsing logic errors
-
-**Problem Solved**: AI was putting "it's high priority" in description field even though priority was correctly extracted. Solution: Enhanced prompt with explicit exclusion rules and examples.
-
-#### 4. **Design Decisions**
-- MVC architecture recommendations
-- RESTful API best practices
-- Error response standardization
-- Database schema optimization
-
-#### 5. **Documentation**
-- README structure and formatting
-- API documentation
-- Markdown formatting (tables, code blocks, alerts)
+#### 4. Prompt Engineering (System Prompts)
+- **Challenge**: The system was initially failing to correctly distinguish between task description, status, and title.
+- **Solution**: Used AI to refine the system prompts.
+- **Example**:
+  - *Initial*: "Extract task details." -> Resulted in mixed data.
+  - *Refined*: Specific instructions added to exclude status words from the description and format the output strictly as JSON. (See logic in `aiService.js` and the examples below).
 
 ### Notable Approaches
 
@@ -564,7 +544,7 @@ Extract task details from: "${transcript}"
 Return JSON with title, description, priority, dueDate, status
 ```
 
-**Problem**: AI interpretation too broad, inconsistent results
+**Problem**: AI interpretation too broad, inconsistent results.
 
 **Refined Approach** (Detailed with Examples):
 ```
@@ -583,7 +563,7 @@ CRITICAL RULES:
 4. Empty description if no extra details
 ```
 
-**Result**: 90%+ accuracy improvement
+**Result**: 90%+ accuracy improvement.
 
 #### Iterative Debugging Pattern
 
