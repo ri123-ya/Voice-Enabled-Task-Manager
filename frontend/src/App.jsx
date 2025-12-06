@@ -91,14 +91,11 @@ function App() {
   const handleVoiceCommand = async (command) => {
     try {
       showNotification(`Processing: "${command}"`, 'info');
-      const result = await connection.processVoiceCommand(command);
+      const newTask = await connection.processVoiceCommand(command);
       
-      if (result.task) {
-        setTasks([...tasks, result.task]);
-        showNotification('Task created from voice command!', 'success');
-      } else {
-        showNotification(result.message || 'Command processed', 'info');
-      }
+      // The backend returns the task directly
+      setTasks([...tasks, newTask]);
+      showNotification('Task created from voice command!', 'success');
     } catch (error) {
       showNotification('Failed to process voice command', 'error');
       console.error('Error processing voice command:', error);
