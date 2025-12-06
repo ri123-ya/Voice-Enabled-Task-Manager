@@ -12,7 +12,6 @@ const VoiceButton = ({ onVoiceCommand }) => {
   const streamRef = useRef(null);
 
   // Get Deepgram API key from environment variable
-  // Make sure to add VITE_DEEPGRAM_API_KEY to your .env file
   const DEEPGRAM_API_KEY = import.meta.env.VITE_DEEPGRAM_API_KEY;
 
   const startListening = async () => {
