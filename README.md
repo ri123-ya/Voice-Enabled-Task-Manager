@@ -2,7 +2,7 @@
 
 A modern task management application that leverages AI and voice input to create, manage, and organize tasks efficiently. The system uses Google's Gemini AI to intelligently parse voice commands into structured task data.
 
-## 📋 Table of Contents
+<!-- ## 📋 Table of Contents
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -11,7 +11,7 @@ A modern task management application that leverages AI and voice input to create
 - [Project Structure](#project-structure)
 - [Decisions & Assumptions](#decisions--assumptions)
 - [AI Tools Usage](#ai-tools-usage)
-- [License](#license)
+- [License](#license) -->
 
 ---
 
