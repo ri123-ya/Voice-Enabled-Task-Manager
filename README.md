@@ -34,13 +34,13 @@ A modern task management application that leverages AI and voice input to create
 
 ---
 
-## 🏗️ System Architecture
+<!--## 🏗️ System Architecture--->
 
-### High-Level Architecture
+<!--### High-Level Architecture-->
 
-The application follows a modern **Client-Server-Database** architecture enriched with **AI Services** for voice processing and natural language understanding.
+<!--The application follows a modern **Client-Server-Database** architecture enriched with **AI Services** for voice processing and natural language understanding.-->
 
-```mermaid
+<!--```mermaid
 graph TD
     User[👤 User] -->|Voice Input| Frontend[💻 React Frontend]
     
@@ -58,8 +58,9 @@ graph TD
         Backend -->|Save Task| Atlas[(🍃 MongoDB Atlas)]
     end
     
-    Backend -->|Task Object| Frontend
+    Backend -->|Task Object| Frontend-->
 ```
+
 
 ### Data Flow
 
