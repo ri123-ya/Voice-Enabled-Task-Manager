@@ -277,12 +277,6 @@ http://localhost:5000/api
 
 **Endpoint**: `GET /api/tasks`
 
-**Query Parameters**:
-- `status` (optional): Filter by status
-- `priority` (optional): Filter by priority
-- `search` (optional): Search in title/description
-- `dueDate` (optional): Filter by due date (YYYY-MM-DD)
-
 **Success Response (200)**:
 ![Get All Tasks Response](assets/get_all_tasks_response.png)
 ```json
