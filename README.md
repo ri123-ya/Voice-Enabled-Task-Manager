@@ -251,6 +251,7 @@ http://localhost:5000/api
 ```
 
 **Success Response (201)**:
+![Create Task Response](assets/create_task_response.png)
 ```json
 {
   "_id": "693198a1827a4e8786209b15",
@@ -263,6 +264,7 @@ http://localhost:5000/api
 ```
 
 **Error Response (400)**:
+![Create Task Error Response](assets/create_task_error.png)
 ```json
 {
   "message": "Task validation failed: title: Path `title` is required."
@@ -282,6 +284,7 @@ http://localhost:5000/api
 - `dueDate` (optional): Filter by due date (YYYY-MM-DD)
 
 **Success Response (200)**:
+![Get All Tasks Response](assets/get_all_tasks_response.png)
 ```json
 [
   {
@@ -300,6 +303,7 @@ http://localhost:5000/api
 **Endpoint**: `GET /api/tasks/:id`
 
 **Success Response (200)**:
+![Get Task By ID Response](assets/get_task_by_id_response.png)
 ```json
 {
   "_id": "693198a1827a4e8786209b15",
@@ -310,6 +314,7 @@ http://localhost:5000/api
 ```
 
 **Error Response (404)**:
+![Task Not Found Response](assets/task_not_found_response.png)
 ```json
 {
   "message": "Task not found"
@@ -330,6 +335,7 @@ http://localhost:5000/api
 ```
 
 **Success Response (200)**:
+![Update Task Response](assets/update_task_response.png)
 ```json
 {
   "_id": "693198a1827a4e8786209b15",
@@ -346,6 +352,7 @@ http://localhost:5000/api
 **Endpoint**: `DELETE /api/tasks/:id`
 
 **Success Response (200)**:
+![Delete Task Response](assets/delete_task_response.png)
 ```json
 {
   "message": "Task deleted successfully"
@@ -366,6 +373,7 @@ http://localhost:5000/api
 ```
 
 **Success Response (201)**:
+![Analyze Voice Input Response](assets/analyze_voice_response.png)
 ```json
 {
   "_id": "69319861827a4e8786209b13",
@@ -377,6 +385,7 @@ http://localhost:5000/api
 ```
 
 **Error Response (400)**:
+![Analyze Error Response](assets/analyze_error_response.png)
 ```json
 {
   "message": "Transcript is required"
