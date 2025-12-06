@@ -385,7 +385,7 @@ http://localhost:5000/api
 
 ---
 
-## 📁 Project Structure
+<!-- ## 📁 Project Structure
 
 ```
 aerchain/
@@ -424,9 +424,9 @@ aerchain/
 │   └── .env                       # Frontend environment variables (git-ignored)
 ├── LICENSE                        # ISC License
 └── README.md                      # This file
-```
+``` -->
 
----
+<!-- --- -->
 
 ## 💡 Decisions & Assumptions
 
