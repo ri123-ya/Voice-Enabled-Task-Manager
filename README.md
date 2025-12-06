@@ -17,6 +17,15 @@ A modern task management application that leverages AI and voice input to create
 
 ## ✨ Features
 
+### Frontend
+- **Modern React UI**: Built with React and Tailwind CSS for a beautiful, responsive interface
+- **Voice Recording**: High-quality voice recording with Deepgram API transcription
+- **Real-time Transcription**: Speech-to-text conversion with editable results before submission
+- **Task Management**: Create, edit, delete and move tasks between statuses
+- **Search & Filter**: Real-time filtering by status, priority, and text search
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+
+### Backend
 - **Voice-Enabled Task Creation**: Create tasks using natural language voice commands
 - **AI-Powered Task Parsing**: Automatically extract task details, priority, due dates, and status from voice input
 - **Complete CRUD Operations**: Create, read, update, and delete tasks
@@ -28,7 +37,17 @@ A modern task management application that leverages AI and voice input to create
 
 ## 🛠️ Tech Stack
 
+### Frontend
+
+- **Framework**: React 18+ with Vite
+- **Styling**: Tailwind CSS v3.4+
+- **Voice Transcription**: Deepgram API (Nova-2 model)
+- **HTTP Client**: Axios
+- **UI Components**: Custom components with Tailwind CSS
+- **State Management**: React Hooks (useState, useRef, useEffect)
+
 ### Backend
+
 - **Runtime**: Node.js v18+ (ES Modules)
 - **Framework**: Express.js v5.2.1
 - **Database**: MongoDB (local/cloud) with Mongoose ODM v9.0.0
@@ -44,6 +63,9 @@ A modern task management application that leverages AI and voice input to create
 - **@google/generative-ai**: AI-powered natural language processing
 - **cors**: Enable cross-origin requests
 - **dotenv**: Load environment variables from .env file
+- **axios**: Promise-based HTTP client
+- **react**: Frontend UI library
+- **tailwindcss**: Utility-first CSS framework
 
 ---
 
@@ -69,6 +91,12 @@ Before you begin, ensure you have the following installed:
    - Create new API key
    - Copy the key for later use
 
+4. **Deepgram API Key** (for Voice Transcription)
+   - Visit [Deepgram Console](https://console.deepgram.com/)
+   - Sign up for free account (includes 45,000 minutes/year)
+   - Create a new API key
+   - Copy the key for later use
+
 ---
 
 ### Installation Steps
@@ -80,7 +108,17 @@ git clone https://github.com/ri123-ya/Voice-Enabled-Task-Manager.git
 cd Voice-Enabled-Task-Manager
 ```
 
-#### 2. Backend Setup
+#### 2. Frontend Setup
+
+```bash
+# Navigate to frontend directory (from project root)
+cd frontend
+
+# Install dependencies
+npm install
+```
+
+#### 3. Backend Setup
 
 ```bash
 # Navigate to backend directory
@@ -90,23 +128,37 @@ cd backend
 npm install
 ```
 
-#### 3. Configure Environment Variables
+#### 4. Configure Frontend Environment Variables
+
+Create a `.env` file in the `frontend` directory:
+
+```env
+# Deepgram API Configuration
+VITE_DEEPGRAM_API_KEY=your_deepgram_api_key_here
+```
+
+> [!IMPORTANT]
+> - Replace `your_deepgram_api_key_here` with your actual Deepgram API key
+> - The `VITE_` prefix is **required** by Vite to make environment variables accessible in the browser
+> - Never commit your `.env` file to version control
+
+#### 5. Configure Backend Environment Variables
 
 Create a `.env` file in the `backend` directory:
 
 ```env
 # Server Configuration
-PORT=5000
+PORT=3000
 
 # Database Configuration
-MONGODB_URI=mongodb://localhost:27017/task-manager
+MONGODB_URI=your_mongodb_uri_here
 
 # AI Configuration
 GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 > [!IMPORTANT]
-> Replace `your_gemini_api_key_here` with your actual Google Gemini API key.
+> Replace `your_gemini_api_key_here` and `your_mongodb_uri_here` with your actual Google Gemini API key and MongoDB URI respectively.
 
 ---
 
@@ -125,11 +177,41 @@ Server is running on port 3000
 Connected to MongoDB
 ```
 
-#### 2. Verify the Server
+#### 2. Start the Frontend Development Server
+
+Open a new terminal window:
 
 ```bash
-# Test server
-curl http://localhost:5000
+# From the frontend directory
+npm run dev
+```
+
+You should see:
+```
+  VITE v5.x.x  ready in xxx ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+
+#### 3. Access the Application
+
+Open your browser and navigate to:
+```
+http://localhost:5173
+```
+
+> [!TIP]
+> - **Backend API**: http://localhost:3000
+> - **Frontend App**: http://localhost:5173
+> - Make sure both servers are running simultaneously
+
+#### 4. Verify the Backend API
+
+```bash
+# Test server health
+curl http://localhost:3000
 
 # Expected response:
 # "Voice-Enabled Task Manager API is running"
@@ -319,8 +401,28 @@ aerchain/
 │   │   └── aiService.js           # Google Gemini AI integration for NLP
 │   ├── connection.js              # MongoDB connection configuration
 │   ├── index.js                   # Express server entry point
-│   ├── package.json               # Dependencies and npm scripts
-│   └── .env                       # Environment variables (git-ignored)
+│   ├── package.json               # Backend dependencies
+│   └── .env                       # Backend environment variables (git-ignored)
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── connection.js      # API service for backend communication
+│   │   ├── components/
+│   │   │   ├── VoiceButton.jsx    # Voice recording component with Deepgram
+│   │   │   ├── TaskColumn.jsx     # Kanban column component
+│   │   │   ├── TaskCard.jsx       # Individual task card
+│   │   │   ├── AddNewTask.jsx     # Modal for adding new tasks
+│   │   │   ├── EditTaskCard.jsx   # Modal for editing tasks
+│   │   │   └── SearchFilter.jsx   # Search and filter component
+│   │   ├── App.jsx                # Main application component
+│   │   ├── main.jsx               # React entry point
+│   │   └── index.css              # Tailwind CSS styles
+│   ├── public/                    # Static assets
+│   ├── index.html                 # HTML template
+│   ├── package.json               # Frontend dependencies
+│   ├── vite.config.js             # Vite configuration
+│   ├── tailwind.config.js         # Tailwind CSS configuration
+│   └── .env                       # Frontend environment variables (git-ignored)
 ├── LICENSE                        # ISC License
 └── README.md                      # This file
 ```
