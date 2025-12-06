@@ -61,7 +61,7 @@ export const connection = {
   // Process voice command
   processVoiceCommand: async (command) => {
     try {
-      const response = await axios.post(`${API_URL}/analyze`, { command });
+      const response = await axios.post(`${API_URL}/analyze`, { transcript: command });
       return response.data;
     } catch (error) {
       console.error('Error processing voice command:', error);
