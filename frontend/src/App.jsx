@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import KanbanColumn from './components/TaskColumn';
+import TaskColumn from './components/TaskColumn';
 import VoiceButton from './components/VoiceButton';
 import AddTaskModal from './components/AddNewTask';
 import EditTaskModal from './components/EditTaskCard';
@@ -186,7 +186,7 @@ function App() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
-            <KanbanColumn
+            <TaskColumn
               title="To Do"
               tasks={todoTasks}
               icon="📋"
@@ -195,7 +195,7 @@ function App() {
               onStatusChange={handleStatusChange}
               onEditTask={handleOpenEditModal}
             />
-            <KanbanColumn
+            <TaskColumn
               title="In Progress"
               tasks={inProgressTasks}
               icon="⚡"
@@ -204,7 +204,7 @@ function App() {
               onStatusChange={handleStatusChange}
               onEditTask={handleOpenEditModal}
             />
-            <KanbanColumn
+            <TaskColumn
               title="Done"
               tasks={doneTasks}
               icon="✅"
